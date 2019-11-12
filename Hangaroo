@@ -1,0 +1,62 @@
+import string
+import random
+alpha = list(string.ascii_lowercase)
+wordList = ["Adult", "Aeroplane", "Air", "Aircraft", "Airforce", "Airport", "Album", "Alphabet", "Apple", "Arm", "Army", "Baby", "Backpack", "Balloon", "Banana", "Bank", "Barbecue", "Bathroom", "Bathtub", "Bed", "Bee", "Bible", "Bird", "Bomb", "Book ", "Boss", "Bottle", "Bowl", "Box", "Boy", "Brain", "Bridge", "Butterfly", "Button", "Cappuccino", "Car", "Carpet", "Carrot", "Cave", "Chair", "Chess", "Chief", "Child", "Chisel", "Chocolates", "Church", "Circle", "Circus", "clock", "clown", "Coffee", "Comet", "Compact", "Compass", "Computer", "Crystal", "Cup", "Cycle", "Data", "Desk", "Diamond", "Dress", "Drill", "Drink", "Drum", "Dung", "Ears", "Earth", "Egg", "Electricity", "Elephant", "Eraser", "Explosive", "Eyes", "Family"Fan, "Fan", "Feather", "Festival", "Film", "Finger", "Fire", "Floodlight", "Flower", "Foot", "Fork", "Freeway", "Fruit", "Fungus", "Game", "Garden", "Gas", "Gate", "Gemstone", "Girl", "Gloves", "God", "Guitar", "Hammer", "Hat", "Hieroglyph", "Highway", "Horoscope", "Horse", "Hose", "Ice", "Icecream", "Insect", "Jet", "Junk", "Kaleidoscope", "Kitchen", "Knife", "Leather", "Library", "Liqui", "Magnet", "Man", "Map", "Maze", "Meat", "Meteor", "Microscope", "Milk", "Milkshake", "Mist", "Money", "Monster", "Mosquito", "Mouth", "Nail", "Navy", "Necklace", "Needle", "Onion", "PaintBrush", "Pants", "Parachute", "Passport", "Pebble", "Pendulum", "Pepper", "Perfume", "Pillow", "Plane", "Planet", "Pocket", "Post", "Potato", "Printer", "Prison", "Pyramid", "Radar", "Rainbow", "Record", "Restaurant", "Rifle", "Ring", "Robot", "Rock", "Rocket", "Roof", "Room", "Rope", "Saddle", "Salt", "Sandpaper", "Sandwich", "SatelliteSchoo", "Sex", "Ship", "Shoes", "Shop", "Shower", "Signature", "Skeleton", "Slave", "Snail", "Software", "Solid", "Space", "Spectrum", "Sphere", "Spice", "Spiral", "Spoon", "Sports", "Spot", "Square", "Staircase", "Star", "Stomach", "Sunglight", "lasses", "Surveyor", "Swimming", "Sword", "Table", "Tapestry", "Teeth", "Telescope", "Television", "Tennis", "Thermometer", "Tiger", "Toilet", "Tongue", "Torch", "Torpedo", "Train", "Treadmill" ,"Triangle", "Tunnel", "Typewriter", "Umbrella", "Vacuum", "Vampire", "Videotape", "Vulture", "Water", "Weapon", "Web", "Wheelchair", "Window", "Woman", "Worm"]
+secretWord = random.choice(wordList)
+
+def isWordGuessed(secretWord,lettersGuessed):
+    for s in secretWord:
+        x = s in lettersGuessed
+        if x == False:
+            break
+    return x
+
+def getGuessedWord(secretWord,lettersGuessed):
+    lst = []
+    for s in secretWord:
+        if s in lettersGuessed:
+            x = s
+        else: 
+            x = "_"
+        lst.append(x)
+    return "".join(lst)
+
+def getAvailableLetters(lettersGuessed):
+    j = "".join(lettersGuessed)
+    for l in j:
+        if l in alpha:
+            alpha.remove(l)
+    return "".join(alpha)
+
+def Hangaroo(secretWord):
+    lettersGuessed = []
+    lsecret = len(secretWord)
+    secret = []
+    e = 0
+    print("The word is:")
+    while e < lsecret:
+        secret.append("_")
+        e += 1
+    print ("".join(secret))
+    mistakesMade = 0
+    while mistakesMade < 6:
+        if isWordGuessed(secretWord,lettersGuessed) == True:
+            break
+        print ("You have ", 6-mistakesMade, " guesses left")
+        print ("Available letters: ",getAvailableLetters(lettersGuessed))
+        letter = input("Input your letter guess: ")
+        if letter in lettersGuessed:
+            print ("Noooo!Repetition of guessed letters are not allowed!!!")
+        else:
+            if letter in secretWord:
+                lettersGuessed.append(letter)
+                print("Noiceee, Word: ",getGuessedWord(secretWord,lettersGuessed))
+            else: 
+                lettersGuessed.append(letter)
+                mistakesMade += 1
+                print("Wrong Guess!!That's Oki!!!Word: ",getGuessedWord(secretWord,lettersGuessed))
+    if isWordGuessed(secretWord,lettersGuessed) == True:
+        print("Very Noiceee!!!Congratulations,the Kangaroo is staying alive staying alive HA HA HA HA!!!")
+    elif mistakesMade == 6:
+        print("Awit:((, the Kangaroo has been slain!!!Try Again")
+        
