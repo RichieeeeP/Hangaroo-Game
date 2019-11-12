@@ -1,0 +1,12 @@
+import string
+lst = list(string.ascii_lowercase)
+lettersGuessed = input("Enter letters guessed in a list: ")
+low = lettersGuessed.lower()
+j = "".join(low)
+def getAvailableLetters(lettersGuessed):
+    for l in j:
+        if l in lst:
+            lst.remove(l)
+    return "".join(lst)
+print(getAvailableLetters(lettersGuessed))         
+    
