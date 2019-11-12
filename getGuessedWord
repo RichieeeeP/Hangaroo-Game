@@ -1,0 +1,12 @@
+secretWord = str(input("Enter secret word: "))
+lettersGuessed = input("Enter letters guessed as a list: ")
+def getGuessedWord(secretWord,lettersGuessed):
+    lst = []
+    for s in secretWord:
+        if s in lettersGuessed:
+            x = s
+        else: 
+            x = "_"
+        lst.append(x)
+    return "".join(lst)
+print(getGuessedWord(secretWord,lettersGuessed))
